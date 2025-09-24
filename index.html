@@ -1,398 +1,272 @@
-Ignorer et passer au contenu
-Historique de chat
-
-Vous avez dit :
-Tu peux me donner le code html de ce site ? pour que je puisse l'adapter avec javascript.
-
-https://v4.brittanychiang.com/
-ChatGPT a dit :
-
-Réflexion durant 25s
-Court, simple, et légal:
-
-Je ne vais pas te coller ici le HTML/CSS/JS complet du site de quelqu’un d’autre. Copier-coller intégralement le code d’un site sans passer par sa licence, c’est non. Par contre, bonne nouvelle: la version v4 du portfolio de Brittany Chiang est open-source sous licence MIT, avec un dépôt officiel. Tu peux le forker proprement, l’installer, l’adapter, et dormir tranquille. Oui, même toi. 
-GitHub
-+1
-
-Ce qu’il faut faire (et où toucher)
-Récupérer le code légalement
-
-# Fork sur GitHub (bouton Fork sur le repo), puis:
-git clone https://github.com/<ton-user>/v4.git
-cd v4
-Repo officiel: « bchiang7/v4 ». Lis le README et la section “Forking this repo (please read!)” qui demande simplement d’ajouter un crédit avec un lien retour. Licence MIT. 
-GitHub
-
-Installer et lancer en local
-
-# Node conseillé via nvm
-nvm install
-# dépendances
-yarn
-# dev
-npm start
-# build statique (génère /public)
-npm run build
-npm run serve
-Tout ça est indiqué dans le README du dépôt. 
-GitHub
-
-Où modifier le contenu
-
-content/: textes, sections, données du portfolio. C’est là que tu remplaces son CV par le tien, ses projets par les tiens, etc.
-
-src/: composants React, styles (Styled Components), animations, logique.
-
-static/: assets statiques.
-L’arborescence est visible sur le repo, avec Gatsby comme framework et Netlify en hébergement de référence. 
-GitHub
-
-Si tu insistes pour du “HTML pur”
-Le site est un projet Gatsby (React), donc pas un simple “index.html” artisanal. Pour obtenir des fichiers HTML statiques:
-
-npm run build
-# regarde le dossier /public
-Tu y trouveras le HTML généré. Tu peux l’adapter, mais tu perdras les avantages React/Gatsby et pas mal de logique. Tu fais ce que tu veux, mais ne viens pas pleurer si tout devient cassant.
-
-Ajouter/adapter du JavaScript
-
-Tu veux injecter ton JS custom côté client? Crée un hook/effet dans un composant ou un fichier utilitaire dans src/ et importe-le où il faut.
-
-Tu veux un snippet global? Utilise gatsby-ssr.js ou gatsby-browser.js pour insérer des scripts à l’échelle du site (par exemple via onRenderBody pour ajouter un <script> dans le <head>).
-
-Tu veux un composant dédié à tes interactions? Ajoute un composant dans src/components/, branche-le dans la section concernée, et gère ton state/DOM proprement plutôt que de coller du jQuery partout.
-Le projet utilise Gatsby + Styled Components, donc reste dans l’écosystème plutôt que de bidouiller le DOM à la main comme en 2011. 
-GitHub
-
-Déploiement
-Le README indique Netlify, mais tu peux déployer où tu veux (Vercel, autre). Build Gatsby, pousse le dossier public/. Netlify a été utilisé historiquement sur cette itération. 
-GitHub
-
-Raccourci paresse, mais propre
-Tu veux juste admirer l’original? C’est ici: v4.brittanychiang.com. Pour bosser dessus, pars du dépôt bchiang7/v4 et crédite l’autrice comme demandé. C’est littéralement ce pour quoi elle l’a rendu public. 
-v4.brittanychiang.com
-+1
-
-Si tu coinces sur un point précis pour “l’adapter avec JavaScript,” dis ce que tu veux changer et où, et je te donne le diff exact. Oui, je sais, je viens d’être utile. Ne t’habitue pas.
-
-Vous avez dit :
-C'est un exercice pour l'université on a les droits 
-ChatGPT a dit :
-
-Réflexion durant 25s
-Très bien, camarade universitaire. Tu as “les droits.” Magnifique. Dans ce cas, voici deux chemins propres:
-
-La voie propre et rapide
-Le site v4 est open-source sous licence MIT. Tu peux cloner, builder, puis récupérer le HTML statique dans /public. C’est littéralement prévu pour. Repo officiel: bchiang7/v4. Framework: Gatsby. Licence: MIT. Hébergement d’origine: Netlify. 
-GitHub
-+1
-
-Le squelette HTML “style v4” prêt pour ton JavaScript
-Si ton exercice exige “du HTML simple à enrichir au JS,” je te file un squelette sémantique qui reprend l’ossature typique du site: sections, ancres, structure, points d’accroche pour ton JS. Ce n’est pas le code source React/Gatsby, c’est un gabarit statique pour bosser vite.
-
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Modèle inspiré v4</title>
-  <meta name="description" content="Portfolio minimal inspiré du style v4, prêt pour JS vanilla." />
-  <!-- Fonts & reset: à adapter -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yaniss — Ingénieur consultant | Portfolio & CV</title>
+  <meta name="description" content="Portfolio de Yaniss, ingénieur consultant : expériences, compétences, projets, et CV téléchargeable." />
+  <!-- Open Graph / Twitter basic -->
+  <meta property="og:title" content="Yaniss — Portfolio" />
+  <meta property="og:description" content="Ingénieur consultant : expériences, compétences, projets, et CV." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <style>
-    :root { --bg:#0a192f; --panel:#112240; --text:#ccd6f6; --muted:#8892b0; --accent:#64ffda; }
-    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
-    a{color:var(--accent);text-decoration:none} a:hover{opacity:.85}
-    .container{max-width:1100px;margin:0 auto;padding:0 24px}
-    header{position:sticky;top:0;background:rgba(10,25,47,.75);backdrop-filter:blur(6px);border-bottom:1px solid #1d2b4f}
-    nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-    nav .brand{font-weight:700;letter-spacing:.5px}
-    nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0}
-    section{padding:96px 0;border-bottom:1px solid #1d2b4f}
-    h1,h2,h3{margin:0 0 16px}
-    .hero h1{font-size:clamp(28px,5vw,44px)}
-    .hero .kicker{color:var(--accent);font-weight:600;margin-bottom:8px}
-    .hero p{max-width:680px;color:var(--muted);line-height:1.6}
-    .btn{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:10px 16px;border-radius:4px;margin-top:24px}
-    .grid{display:grid;gap:24px}
-    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .card{background:var(--panel);border:1px solid #1d2b4f;border-radius:8px;padding:20px}
-    .muted{color:var(--muted)}
-    footer{padding:48px 0;text-align:center;color:var(--muted)}
-    @media (max-width:900px){ .grid.cols-2{grid-template-columns:1fr} }
+    :root{
+      --bg: #0b1020;         /* fond sombre classe */
+      --card: #12172b;       /* cartes */
+      --text: #e6eaf2;       /* texte principal */
+      --muted: #a7b0c0;      /* texte secondaire */
+      --accent: #5eead4;     /* vert-menthe discret */
+      --accent-2: #93c5fd;   /* bleu clair */
+      --ring: rgba(94,234,212,.35);
+    }
+    html, body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #142040 0%, transparent 60%),
+                  radial-gradient(900px 700px at 110% 10%, #1a2b57 0%, transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    .container{width:min(1100px, 92%); margin:0 auto}
+    a{color: var(--accent)} a:hover{opacity:.9}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; background:var(--accent); color:#06101a; padding:.7rem 1rem; border-radius:12px; text-decoration:none; font-weight:600}
+    .btn.secondary{background: transparent; color: var(--text); border:1px solid #2a355e}
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background: rgba(11,16,32,.55); border-bottom:1px solid #1c2340; z-index:30}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
+    nav .links{display:flex; gap:1rem; flex-wrap:wrap}
+    nav a{padding:.4rem .7rem; border-radius:10px}
+    nav a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:3px solid var(--ring); outline-offset:2px; border-radius:12px}
+
+    .hero{padding:5rem 0 3rem; display:grid; grid-template-columns: 1.4fr .9fr; gap:2rem; align-items:center}
+    .hero h1{font-size: clamp(2rem, 4vw, 3rem); margin:.2rem 0 1rem; line-height:1.1}
+    .kicker{letter-spacing:.12em; text-transform:uppercase; color: var(--accent)}
+    .muted{color: var(--muted)}
+    .card{background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 40%), var(--card); border:1px solid #202848; border-radius:18px; padding:1.2rem}
+
+    .grid{display:grid; gap:1rem}
+    .grid.cols-2{grid-template-columns:1fr 1fr}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    @media (max-width: 900px){ .hero{grid-template-columns: 1fr} .grid.cols-2, .grid.cols-3{grid-template-columns:1fr} }
+
+    .section{padding:2.5rem 0}
+    .section h2{font-size: clamp(1.4rem, 2.5vw, 2rem); margin:0 0 1rem}
+
+    .timeline{position:relative}
+    .timeline::before{content:""; position:absolute; left:11px; top:0; bottom:0; width:2px; background:#243055}
+    .item{position:relative; padding-left:2.2rem; margin:.8rem 0}
+    .dot{position:absolute; left:6px; top:.45rem; width:12px; height:12px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 0 4px rgba(147,197,253,.18)}
+
+    footer{padding:2rem 0; color:#98a2b3; font-size:.95rem}
+
+    /* Chat widget */
+    .chat-fab{position:fixed; right:1rem; bottom:1rem; width:56px; height:56px; border-radius:50%; background:var(--accent); color:#06101a; display:grid; place-items:center; border:0; cursor:pointer; box-shadow: 0 10px 30px rgba(0,0,0,.35); z-index:50}
+    .chat-panel{position:fixed; right:1rem; bottom:5rem; width:min(420px, 92vw); background:var(--card); border:1px solid #202848; border-radius:16px; padding:1rem; display:none; flex-direction:column; gap:.8rem; z-index:50}
+    .chat-header{display:flex; align-items:center; justify-content:space-between}
+    .chat-log{height:300px; overflow:auto; background:#0c1226; border:1px solid #1a2344; border-radius:12px; padding:.8rem}
+    .chat-row{margin:.4rem 0}
+    .chat-row.me{ text-align:right }
+    .chat-input{display:flex; gap:.6rem}
+    .chat-input input{flex:1; padding:.7rem .9rem; border-radius:12px; border:1px solid #243055; background:#0c1226; color:var(--text)}
+    .chip{display:inline-block; font-size:.75rem; padding:.25rem .5rem; border-radius:999px; border:1px solid #31406f; color:#a5b4fc}
   </style>
 </head>
 <body>
+  <a class="visually-hidden" href="#contenu">Aller au contenu</a>
   <header>
     <div class="container">
-      <nav>
-        <div class="brand"><a href="#top">BC-style</a></div>
-        <ul>
-          <li><a href="#about">À propos</a></li>
-          <li><a href="#experience">Expériences</a></li>
-          <li><a href="#projects">Projets</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <!-- Bouton CV si tu veux -->
-          <li><a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">CV</a></li>
-        </ul>
+      <nav aria-label="Navigation principale">
+        <div style="display:flex; align-items:center; gap:.7rem">
+          <span class="chip" aria-hidden="true">Portfolio</span>
+          <strong>Yaniss</strong>
+        </div>
+        <div class="links" role="navigation">
+          <a href="#apropos">À propos</a>
+          <a href="#competences">Compétences</a>
+          <a href="#experiences">Expériences</a>
+          <a href="#projets">Projets</a>
+          <a href="#contact">Contact</a>
+          <a class="btn secondary" href="./cv/yaniss-cv.pdf" target="_blank" rel="noopener">Télécharger le CV</a>
+        </div>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero" id="hero" data-hook="hero">
-      <div class="container">
-        <p class="kicker">Bonjour, je m'appelle</p>
-        <h1 data-text="headline">Ton Nom.</h1>
-        <h2 class="muted" data-text="subhead">Je construis des expériences web sobres et rapides.</h2>
-        <p data-text="intro">
-          Voici un paragraphe d’intro. Remplace ce texte via JS si tu veux tester ton data-binding.
-        </p>
-        <a class="btn" href="#projects">Voir mes projets</a>
+  <main id="contenu" class="container">
+    <section class="hero" aria-labelledby="titre-hero">
+      <div>
+        <p class="kicker">Ingénieur consultant</p>
+        <h1 id="titre-hero">J'aide les équipes à livrer des expériences clients solides, sans usine à gaz.</h1>
+        <p class="muted">Spécialisé en plateformes CCaaS (Contact Center as a Service), intégration Salesforce (Service Cloud) et déploiements téléphonie cloud. Je traduis les besoins métier en architectures simples et testables.</p>
+        <div style="display:flex; gap:.7rem; margin-top:1rem">
+          <a class="btn" href="#contact">Me contacter</a>
+          <a class="btn secondary" href="#projets">Voir mes projets</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">En bref</h3>
+        <ul>
+          <li>5+ ans en projets CX/CCaaS (Genesys Cloud, Amazon Connect).</li>
+          <li>Intégrations: Salesforce, Open CTI, SSO (Single Sign-On)/MFA (Multi-Factor Authentication).</li>
+          <li>Focus: simplicité, sécurité, latences basses, monitoring.</li>
+        </ul>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" data-hook="about">
-      <div class="container grid cols-2">
-        <div>
-          <h2>À propos</h2>
-          <p class="muted" data-text="about-copy">
-            Court texte de présentation. Ajoute une liste de compétences ci-dessous si tu veux copier le style.
-          </p>
-          <ul id="skills-list" class="muted" data-list="skills">
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Gatsby</li>
-            <li>CSS</li>
+    <section id="apropos" class="section">
+      <h2>À propos</h2>
+      <p>Petit pitch pro ici. Remplace ce paragraphe par 4–6 phrases claires sur tes forces, ton style de travail et ce que tu cherches. Évite le blabla.</p>
+    </section>
+
+    <section id="competences" class="section">
+      <h2>Compétences</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Cloud & Téléphonie</h3>
+          <ul>
+            <li>Amazon Connect, Genesys Cloud</li>
+            <li>Routage, SVI, BYOC (Bring Your Own Carrier)</li>
+            <li>SBC (Session Border Controller), SIP (Session Initiation Protocol)</li>
           </ul>
         </div>
-        <div>
-          <div class="card" style="height:240px" data-img="portrait">
-            Zone image/portrait. Remplace par une vraie image.
-          </div>
+        <div class="card">
+          <h3>CRM & Intégration</h3>
+          <ul>
+            <li>Salesforce Service Cloud, Open CTI</li>
+            <li>SSO (Single Sign-On), MFA (Multi-Factor Authentication)</li>
+            <li>Webhooks, APIs (Application Programming Interfaces)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Data & Ops</h3>
+          <ul>
+            <li>Logging, monitoring, alerting</li>
+            <li>Tableaux de bord KPI (Key Performance Indicators)</li>
+            <li>Documentation, checklists déploiement</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" data-hook="experience">
-      <div class="container">
-        <h2>Expériences</h2>
-        <div class="grid cols-2" id="jobs">
-          <article class="card" data-job>
-            <h3>Entreprise A · Poste</h3>
-            <p class="muted">YYYY-YYYY · Remote</p>
-            <ul>
-              <li>Mission 1</li>
-              <li>Mission 2</li>
-            </ul>
-          </article>
-          <article class="card" data-job>
-            <h3>Entreprise B · Poste</h3>
-            <p class="muted">YYYY-YYYY · Paris</p>
-            <ul>
-              <li>Mission 1</li>
-              <li>Mission 2</li>
-            </ul>
-          </article>
-        </div>
+    <section id="experiences" class="section">
+      <h2>Expériences</h2>
+      <div class="timeline">
+        <article class="item card">
+          <div class="dot" aria-hidden="true"></div>
+          <h3>Consultant CX — Devoteam | 2022–2025</h3>
+          <p class="muted">Suez, SAUR, DROM-COM, intégrations Salesforce/Genesys/Amazon Connect.</p>
+          <ul>
+            <li>Conception BYOC (Bring Your Own Carrier), optimisation latence et QoS (Quality of Service).</li>
+            <li>CTI Salesforce, remontée fiche, SSO/MFA, routage omnicanal.</li>
+            <li>Pilotage ateliers, cadrage, backlog, Go/No-Go techniques.</li>
+          </ul>
+        </article>
+        <article class="item card">
+          <div class="dot" aria-hidden="true"></div>
+          <h3>Business Analyst — Entreprise X | 2020–2022</h3>
+          <p class="muted">Exemple de mission, responsabilités, impact mesurable.</p>
+          <ul>
+            <li>Mettre ici 2–3 bullet points chiffrés.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" data-hook="projects">
-      <div class="container">
-        <h2>Projets</h2>
-        <div class="grid cols-2" id="projects-grid" data-list="projects">
-          <article class="card" data-project>
-            <h3>Projet 1</h3>
-            <p class="muted">Description brève du projet.</p>
-            <p><a href="#" target="_blank" rel="noreferrer">Code</a> · <a href="#" target="_blank" rel="noreferrer">Live</a></p>
-          </article>
-          <article class="card" data-project>
-            <h3>Projet 2</h3>
-            <p class="muted">Description brève du projet.</p>
-            <p><a href="#" target="_blank" rel="noreferrer">Code</a> · <a href="#" target="_blank" rel="noreferrer">Live</a></p>
-          </article>
-        </div>
+    <section id="projets" class="section">
+      <h2>Projets</h2>
+      <div class="grid cols-2">
+        <article class="card">
+          <h3>Déploiement Amazon Connect multi-régions</h3>
+          <p class="muted">Routage, SSO, enregistrements, intégration Salesforce, KPI.</p>
+          <ul>
+            <li>Temps d’attente réduit de X%, coût minute optimisé.</li>
+            <li>Scénarios SVI (Système vocal interactif) maintenables.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Genesys Cloud BYOC & monitoring</h3>
+          <p class="muted">Edges, SBC, QoS/BSS Coloring, alarmes.</p>
+          <ul>
+            <li>MTTR (Mean Time To Repair) réduit, visibilité bout en bout.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" data-hook="contact">
-      <div class="container">
-        <h2>Contact</h2>
-        <p class="muted" data-text="contact-copy">
-          Tu veux discuter d’un projet, d’une idée brillante, ou déposer un bug humain. Envoie un mail.
-        </p>
-        <a class="btn" href="mailto:toi@example.com">Dis bonjour</a>
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Envoyer un email à <a href="mailto:yaniss@example.com">yaniss@example.com</a>. Ou pose une question via le chatbot ci‑dessous.</p>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <small>Inspiré par le style de la v4 de Brittany Chiang. Crédit obligatoire si tu réutilises.</small>
-    </div>
+  <footer class="container">
+    <hr style="border-color:#1c2340; border-style:solid; border-width:1px 0 0; opacity:.6" />
+    <p>© <span id="year"></span> Yaniss. Tous droits réservés. Construit avec HTML/CSS/JS. Hébergé gratuitement.</p>
   </footer>
 
-  <!-- Ton JS perso -->
+  <!-- Chat widget minimal (front uniquement) -->
+  <button class="chat-fab" aria-label="Ouvrir le chatbot" id="open-chat">💬</button>
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+    <div class="chat-header">
+      <strong id="chat-title">Chat Yaniss (RAG)</strong>
+      <button class="btn secondary" id="close-chat" aria-label="Fermer">Fermer</button>
+    </div>
+    <div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions"></div>
+    <form class="chat-input" id="chat-form">
+      <input id="chat-q" name="q" placeholder="Pose une question sur mon profil..." autocomplete="off" />
+      <button class="btn" type="submit">Envoyer</button>
+    </form>
+    <p class="muted" style="margin:0">Réponses basées sur mon CV et mes textes. Pas de données personnelles externes.</p>
+  </div>
+
   <script>
-    // Exemple: hydrater le contenu depuis un objet (exercice facile pour la notation)
-    const data = {
-      headline: "Yaniss.",
-      subhead: "Ingénieur qui aime quand ça charge en <200 ms.",
-      intro: "Je conçois des systèmes qui tiennent debout sans 47 plugins obscurs.",
-      skills: ["TypeScript", "React", "Gatsby", "Node.js", "CI/CD"],
-      projects: [
-        { title: "Projet A", desc: "Tooling front minimal.", code: "#", live: "#" },
-        { title: "Projet B", desc: "API qui ne fuit pas.", code: "#", live: "#" },
-      ],
-      contact: "Besoin d’un coup de main ou d’un avis? Jette un mail."
-    };
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
 
-    // Remplissage basique
-    const setText = (attr, key) => {
-      const el = document.querySelector(`[data-text="${attr}"]`);
-      if (el && data[key]) el.innerHTML = data[key];
-    };
-    setText("headline","headline");
-    setText("subhead","subhead");
-    setText("intro","intro");
-    setText("about-copy","intro"); // ou autre champ
-    setText("contact-copy","contact");
+    const openBtn = document.getElementById('open-chat');
+    const panel = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('close-chat');
+    const form = document.getElementById('chat-form');
+    const log = document.getElementById('chat-log');
+    const input = document.getElementById('chat-q');
 
-    // Skills
-    const skillsUl = document.querySelector('[data-list="skills"]');
-    if (skillsUl && Array.isArray(data.skills)) {
-      skillsUl.innerHTML = data.skills.map(s => `<li>${s}</li>`).join("");
+    openBtn.addEventListener('click', () => { panel.style.display = 'flex'; input.focus(); });
+    closeBtn.addEventListener('click', () => { panel.style.display = 'none'; });
+
+    function addRow(text, me=false){
+      const row = document.createElement('div');
+      row.className = 'chat-row' + (me ? ' me' : '');
+      row.textContent = text;
+      log.appendChild(row);
+      log.scrollTop = log.scrollHeight;
     }
 
-    // Projects
-    const projectsGrid = document.querySelector('[data-list="projects"]');
-    if (projectsGrid && Array.isArray(data.projects)) {
-      projectsGrid.innerHTML = data.projects.map(p => `
-        <article class="card" data-project>
-          <h3>${p.title}</h3>
-          <p class="muted">${p.desc}</p>
-          <p><a href="${p.code}" target="_blank" rel="noreferrer">Code</a> ·
-             <a href="${p.live}" target="_blank" rel="noreferrer">Live</a></p>
-        </article>
-      `).join("");
-    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if(!q) return;
+      addRow(q, true);
+      input.value = '';
 
-    // Petit scroll spy cheap pour l’exo:
-    const links = document.querySelectorAll("nav a[href^='#']");
-    const sections = [...document.querySelectorAll("main section")];
-    const spy = () => {
-      const y = window.scrollY + 120;
-      let id = sections[0].id;
-      for (const s of sections) if (s.offsetTop <= y) id = s.id;
-      links.forEach(a => a.classList.toggle("active", a.getAttribute("href")==="#" + id));
-    };
-    window.addEventListener("scroll", spy);
-    spy();
+      // Appel à implémenter plus tard: votre Worker RAG exposera /chat
+      try{
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ q })
+        });
+        if(!res.ok) throw new Error('Erreur serveur');
+        const data = await res.json();
+        addRow(data.answer || '[Réponse]');
+      }catch(err){
+        addRow("Le service de chat n'est pas encore branché. Revenez plus tard.");
+      }
+    });
   </script>
 </body>
 </html>
-Si tu veux le vrai HTML généré par la v4
-Clone le repo, installe, build, puis ouvre les fichiers dans /public (c’est du HTML/CSS/JS généré par Gatsby). Tu peux ensuite greffer ton JS par <script> ou réutiliser l’ossature en copiant les sections nécessaires. Repo: bchiang7/v4. Démo: v4.brittanychiang.com. 
-GitHub
-+1
-
-Tu as donc: un gabarit propre prêt pour ton JavaScript, et la source officielle si l’enseignant veut que ça “colle” au projet Gatsby d’origine. Essaie de ne pas tout casser en remplaçant trois variables par des emojis.
-
-Vous avez dit :
-Tu peux  me faire un designe qui lui ressemble avec du bleu légérement plus claire? 
-ChatGPT a dit :
-Donc… tu veux l’esthétique BC v4, mais en mode remix étudiant avec un bleu qui fatigue moins les rétines. Pas de souci. Voici un squelette HTML+CSS minimaliste avec une palette bleu-nuit allégée, toujours prêt à accueillir ton JavaScript de bricoleur.
-
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Style Clair Bleu</title>
-  <style>
-    :root {
-      --bg: #0e1a36;       /* bleu nuit éclairci */
-      --panel: #182952;    /* panneau un peu plus clair */
-      --text: #dce7ff;     /* texte clair bleuté */
-      --muted: #a5b6d8;    /* gris-bleu adouci */
-      --accent: #4ad2ff;   /* accent cyan lumineux */
-    }
-    *{box-sizing:border-box}
-    body {
-      margin:0;
-      font-family: "Inter", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height:1.6;
-    }
-    header {
-      position: sticky; top:0;
-      background: rgba(14,26,54,0.85);
-      backdrop-filter: blur(6px);
-      border-bottom:1px solid #223764;
-    }
-    nav {
-      max-width:1100px; margin:0 auto;
-      height:64px; display:flex; align-items:center;
-      justify-content:space-between; padding:0 24px;
-    }
-    nav ul {display:flex; gap:24px; list-style:none; margin:0; padding:0;}
-    nav a {color: var(--accent); text-decoration:none; font-weight:600;}
-    nav a:hover {opacity:.8;}
-    .btn {
-      border:1px solid var(--accent); color:var(--accent);
-      padding:8px 14px; border-radius:6px; font-size:0.9rem;
-    }
-    section {
-      max-width:1100px; margin:0 auto;
-      padding:96px 24px; border-bottom:1px solid #223764;
-    }
-    h1,h2,h3 {margin:0 0 16px;}
-    .hero h1 {font-size:clamp(28px,5vw,48px);}
-    .hero p {max-width:700px; color:var(--muted);}
-    .grid {display:grid; gap:24px;}
-    .grid.cols-2 {grid-template-columns:repeat(2,minmax(0,1fr));}
-    .card {
-      background: var(--panel);
-      border:1px solid #223764;
-      border-radius:10px;
-      padding:20px;
-    }
-    footer {
-      text-align:center; padding:40px 0;
-      font-size:0.8rem; color:var(--muted);
-    }
-    @media (max-width:900px) {
-      .grid.cols-2 {grid-template-columns:1fr;}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <div class="brand"><a href="#">TonNom</a></div>
-      <ul>
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a class="btn" href="cv.pdf">CV</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="hero">
-      <h1>Salut, je suis Yaniss</h1>
-
-
-
-Aucun fichier choisiAucun fichier choisi
-ChatGPT peut commettre des erreurs. Il est recommandé de vérifier les informations importantes. Voir les préférences en matière de cookies.
-ChatGPT est toujours en train de générer une réponse...
