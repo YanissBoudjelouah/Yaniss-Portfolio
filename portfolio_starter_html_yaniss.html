@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yaniss — Ingénieur consultant | Portfolio & CV</title>
+  <meta name="description" content="Portfolio de Yaniss, ingénieur consultant : expériences, compétences, projets, et CV téléchargeable." />
+  <!-- Open Graph / Twitter basic -->
+  <meta property="og:title" content="Yaniss — Portfolio" />
+  <meta property="og:description" content="Ingénieur consultant : expériences, compétences, projets, et CV." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg: #0b1020;         /* fond sombre classe */
+      --card: #12172b;       /* cartes */
+      --text: #e6eaf2;       /* texte principal */
+      --muted: #a7b0c0;      /* texte secondaire */
+      --accent: #5eead4;     /* vert-menthe discret */
+      --accent-2: #93c5fd;   /* bleu clair */
+      --ring: rgba(94,234,212,.35);
+    }
+    html, body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, #142040 0%, transparent 60%),
+                  radial-gradient(900px 700px at 110% 10%, #1a2b57 0%, transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    .container{width:min(1100px, 92%); margin:0 auto}
+    a{color: var(--accent)} a:hover{opacity:.9}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; background:var(--accent); color:#06101a; padding:.7rem 1rem; border-radius:12px; text-decoration:none; font-weight:600}
+    .btn.secondary{background: transparent; color: var(--text); border:1px solid #2a355e}
+    header{position:sticky; top:0; backdrop-filter: blur(8px); background: rgba(11,16,32,.55); border-bottom:1px solid #1c2340; z-index:30}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
+    nav .links{display:flex; gap:1rem; flex-wrap:wrap}
+    nav a{padding:.4rem .7rem; border-radius:10px}
+    nav a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:3px solid var(--ring); outline-offset:2px; border-radius:12px}
+
+    .hero{padding:5rem 0 3rem; display:grid; grid-template-columns: 1.4fr .9fr; gap:2rem; align-items:center}
+    .hero h1{font-size: clamp(2rem, 4vw, 3rem); margin:.2rem 0 1rem; line-height:1.1}
+    .kicker{letter-spacing:.12em; text-transform:uppercase; color: var(--accent)}
+    .muted{color: var(--muted)}
+    .card{background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 40%), var(--card); border:1px solid #202848; border-radius:18px; padding:1.2rem}
+
+    .grid{display:grid; gap:1rem}
+    .grid.cols-2{grid-template-columns:1fr 1fr}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    @media (max-width: 900px){ .hero{grid-template-columns: 1fr} .grid.cols-2, .grid.cols-3{grid-template-columns:1fr} }
+
+    .section{padding:2.5rem 0}
+    .section h2{font-size: clamp(1.4rem, 2.5vw, 2rem); margin:0 0 1rem}
+
+    .timeline{position:relative}
+    .timeline::before{content:""; position:absolute; left:11px; top:0; bottom:0; width:2px; background:#243055}
+    .item{position:relative; padding-left:2.2rem; margin:.8rem 0}
+    .dot{position:absolute; left:6px; top:.45rem; width:12px; height:12px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 0 4px rgba(147,197,253,.18)}
+
+    footer{padding:2rem 0; color:#98a2b3; font-size:.95rem}
+
+    /* Chat widget */
+    .chat-fab{position:fixed; right:1rem; bottom:1rem; width:56px; height:56px; border-radius:50%; background:var(--accent); color:#06101a; display:grid; place-items:center; border:0; cursor:pointer; box-shadow: 0 10px 30px rgba(0,0,0,.35); z-index:50}
+    .chat-panel{position:fixed; right:1rem; bottom:5rem; width:min(420px, 92vw); background:var(--card); border:1px solid #202848; border-radius:16px; padding:1rem; display:none; flex-direction:column; gap:.8rem; z-index:50}
+    .chat-header{display:flex; align-items:center; justify-content:space-between}
+    .chat-log{height:300px; overflow:auto; background:#0c1226; border:1px solid #1a2344; border-radius:12px; padding:.8rem}
+    .chat-row{margin:.4rem 0}
+    .chat-row.me{ text-align:right }
+    .chat-input{display:flex; gap:.6rem}
+    .chat-input input{flex:1; padding:.7rem .9rem; border-radius:12px; border:1px solid #243055; background:#0c1226; color:var(--text)}
+    .chip{display:inline-block; font-size:.75rem; padding:.25rem .5rem; border-radius:999px; border:1px solid #31406f; color:#a5b4fc}
+  </style>
+</head>
+<body>
+  <a class="visually-hidden" href="#contenu">Aller au contenu</a>
+  <header>
+    <div class="container">
+      <nav aria-label="Navigation principale">
+        <div style="display:flex; align-items:center; gap:.7rem">
+          <span class="chip" aria-hidden="true">Portfolio</span>
+          <strong>Yaniss</strong>
+        </div>
+        <div class="links" role="navigation">
+          <a href="#apropos">À propos</a>
+          <a href="#competences">Compétences</a>
+          <a href="#experiences">Expériences</a>
+          <a href="#projets">Projets</a>
+          <a href="#contact">Contact</a>
+          <a class="btn secondary" href="./cv/yaniss-cv.pdf" target="_blank" rel="noopener">Télécharger le CV</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu" class="container">
+    <section class="hero" aria-labelledby="titre-hero">
+      <div>
+        <p class="kicker">Ingénieur consultant</p>
+        <h1 id="titre-hero">J'aide les équipes à livrer des expériences clients solides, sans usine à gaz.</h1>
+        <p class="muted">Spécialisé en plateformes CCaaS (Contact Center as a Service), intégration Salesforce (Service Cloud) et déploiements téléphonie cloud. Je traduis les besoins métier en architectures simples et testables.</p>
+        <div style="display:flex; gap:.7rem; margin-top:1rem">
+          <a class="btn" href="#contact">Me contacter</a>
+          <a class="btn secondary" href="#projets">Voir mes projets</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">En bref</h3>
+        <ul>
+          <li>5+ ans en projets CX/CCaaS (Genesys Cloud, Amazon Connect).</li>
+          <li>Intégrations: Salesforce, Open CTI, SSO (Single Sign-On)/MFA (Multi-Factor Authentication).</li>
+          <li>Focus: simplicité, sécurité, latences basses, monitoring.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="apropos" class="section">
+      <h2>À propos</h2>
+      <p>Petit pitch pro ici. Remplace ce paragraphe par 4–6 phrases claires sur tes forces, ton style de travail et ce que tu cherches. Évite le blabla.</p>
+    </section>
+
+    <section id="competences" class="section">
+      <h2>Compétences</h2>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Cloud & Téléphonie</h3>
+          <ul>
+            <li>Amazon Connect, Genesys Cloud</li>
+            <li>Routage, SVI, BYOC (Bring Your Own Carrier)</li>
+            <li>SBC (Session Border Controller), SIP (Session Initiation Protocol)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>CRM & Intégration</h3>
+          <ul>
+            <li>Salesforce Service Cloud, Open CTI</li>
+            <li>SSO (Single Sign-On), MFA (Multi-Factor Authentication)</li>
+            <li>Webhooks, APIs (Application Programming Interfaces)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Data & Ops</h3>
+          <ul>
+            <li>Logging, monitoring, alerting</li>
+            <li>Tableaux de bord KPI (Key Performance Indicators)</li>
+            <li>Documentation, checklists déploiement</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiences" class="section">
+      <h2>Expériences</h2>
+      <div class="timeline">
+        <article class="item card">
+          <div class="dot" aria-hidden="true"></div>
+          <h3>Consultant CX — Devoteam | 2022–2025</h3>
+          <p class="muted">Suez, SAUR, DROM-COM, intégrations Salesforce/Genesys/Amazon Connect.</p>
+          <ul>
+            <li>Conception BYOC (Bring Your Own Carrier), optimisation latence et QoS (Quality of Service).</li>
+            <li>CTI Salesforce, remontée fiche, SSO/MFA, routage omnicanal.</li>
+            <li>Pilotage ateliers, cadrage, backlog, Go/No-Go techniques.</li>
+          </ul>
+        </article>
+        <article class="item card">
+          <div class="dot" aria-hidden="true"></div>
+          <h3>Business Analyst — Entreprise X | 2020–2022</h3>
+          <p class="muted">Exemple de mission, responsabilités, impact mesurable.</p>
+          <ul>
+            <li>Mettre ici 2–3 bullet points chiffrés.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projets" class="section">
+      <h2>Projets</h2>
+      <div class="grid cols-2">
+        <article class="card">
+          <h3>Déploiement Amazon Connect multi-régions</h3>
+          <p class="muted">Routage, SSO, enregistrements, intégration Salesforce, KPI.</p>
+          <ul>
+            <li>Temps d’attente réduit de X%, coût minute optimisé.</li>
+            <li>Scénarios SVI (Système vocal interactif) maintenables.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Genesys Cloud BYOC & monitoring</h3>
+          <p class="muted">Edges, SBC, QoS/BSS Coloring, alarmes.</p>
+          <ul>
+            <li>MTTR (Mean Time To Repair) réduit, visibilité bout en bout.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Envoyer un email à <a href="mailto:yaniss@example.com">yaniss@example.com</a>. Ou pose une question via le chatbot ci‑dessous.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <hr style="border-color:#1c2340; border-style:solid; border-width:1px 0 0; opacity:.6" />
+    <p>© <span id="year"></span> Yaniss. Tous droits réservés. Construit avec HTML/CSS/JS. Hébergé gratuitement.</p>
+  </footer>
+
+  <!-- Chat widget minimal (front uniquement) -->
+  <button class="chat-fab" aria-label="Ouvrir le chatbot" id="open-chat">💬</button>
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+    <div class="chat-header">
+      <strong id="chat-title">Chat Yaniss (RAG)</strong>
+      <button class="btn secondary" id="close-chat" aria-label="Fermer">Fermer</button>
+    </div>
+    <div class="chat-log" id="chat-log" aria-live="polite" aria-relevant="additions"></div>
+    <form class="chat-input" id="chat-form">
+      <input id="chat-q" name="q" placeholder="Pose une question sur mon profil..." autocomplete="off" />
+      <button class="btn" type="submit">Envoyer</button>
+    </form>
+    <p class="muted" style="margin:0">Réponses basées sur mon CV et mes textes. Pas de données personnelles externes.</p>
+  </div>
+
+  <script>
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    const openBtn = document.getElementById('open-chat');
+    const panel = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('close-chat');
+    const form = document.getElementById('chat-form');
+    const log = document.getElementById('chat-log');
+    const input = document.getElementById('chat-q');
+
+    openBtn.addEventListener('click', () => { panel.style.display = 'flex'; input.focus(); });
+    closeBtn.addEventListener('click', () => { panel.style.display = 'none'; });
+
+    function addRow(text, me=false){
+      const row = document.createElement('div');
+      row.className = 'chat-row' + (me ? ' me' : '');
+      row.textContent = text;
+      log.appendChild(row);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if(!q) return;
+      addRow(q, true);
+      input.value = '';
+
+      // Appel à implémenter plus tard: votre Worker RAG exposera /chat
+      try{
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ q })
+        });
+        if(!res.ok) throw new Error('Erreur serveur');
+        const data = await res.json();
+        addRow(data.answer || '[Réponse]');
+      }catch(err){
+        addRow("Le service de chat n'est pas encore branché. Revenez plus tard.");
+      }
+    });
+  </script>
+</body>
+</html>
